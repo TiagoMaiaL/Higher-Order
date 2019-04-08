@@ -1,0 +1,14 @@
+{
+    "name": "higher-order",
+    "main": "higher-order.js",
+    "scripts" : {
+        "start": "node higher-order.js",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TiagoMaiaL/Higher-Order.git"
+    },
+    "author": "Tiago Maia",
+    "license": "MIT"
+}
