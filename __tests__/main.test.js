@@ -105,4 +105,12 @@ describe('_.reduce', () => {
             _.reduce(input, reducerInput);
         }).toThrow();
     });
+
+    test('reduces an array into a value',() => {
+        const input = [0, 1, 2, 3, 4, 5];
+        const reducerInput = (previous, current) => previous + current;
+        const expectedOutput = 15;
+
+        expect(_.reduce(input, reducerInput)).toEqual(expectedOutput);
+    });
 });

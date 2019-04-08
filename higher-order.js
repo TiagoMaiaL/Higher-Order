@@ -21,11 +21,13 @@ const _ = {
 
         let result = initialValue || arr[0];
 
-        if (!result) {
+        if (arr.length == 0 && !result) {
             throw new Error('If the passed array argument is empty, an initial value argument must be provided.');
         }
 
-        // TODO...
+        for (let i = 0; i < arr.length; i++) {
+            result = reducer(result, arr[i]);
+        }
 
         return result;
     },
