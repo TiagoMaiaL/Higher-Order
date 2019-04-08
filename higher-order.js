@@ -26,7 +26,7 @@ const _ = {
         }
 
         for (let i = 0; i < arr.length; i++) {
-            result = reducer(result, arr[i]);
+            result = reducer(result, arr[i], i, arr);
         }
 
         return result;

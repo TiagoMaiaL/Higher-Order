@@ -113,4 +113,23 @@ describe('_.reduce', () => {
 
         expect(_.reduce(input, reducerInput)).toEqual(expectedOutput);
     });
+
+    test('reduce passes the index argument into the reducer callback', () => {
+        const input = [0, 1, 2, 3];
+        const reducerInput = (previous, current, index) => previous + (current * index);
+        const expectedOutput = 14;
+
+        expect(_.reduce(input, reducerInput)).toEqual(expectedOutput);
+    });
+
+    test('reduce passes the array argument into the reducer callback', () => {
+        const input = [0, 1, 2, 3];
+        const reducerInput = (previous, current, index, array) => {
+            // Sum only the values between the beginning and end of the array. 
+            return (index == 0 || index == array.length - 1) ? previous : previous + current;
+        };
+        const expectedOutput = 3;
+
+        expect(_.reduce(input, reducerInput)).toEqual(expectedOutput);
+    });
 });
