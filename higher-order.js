@@ -20,7 +20,9 @@ const _ = {
 
         let mapped = [];
 
-        // ...
+        for (let i = 0; i < arr.length; i++) {
+            mapped.push(mapper(arr[i]));
+        }
 
         return mapped;
     }

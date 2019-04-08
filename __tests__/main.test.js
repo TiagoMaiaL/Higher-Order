@@ -28,6 +28,19 @@ describe('_.map', () => {
     });
 
     test('maps every item in the provided array and returns the mapped output', () => {
+        let input = [0, 1, 2, 3, 4, 5];
+        let inputMapper = (value) => {
+            let textBarUnit = '#';
+            let textBar = ''
 
+            for (let i = 0; i < value; i++) {
+                textBar += textBarUnit;
+            }
+
+            return textBar;
+        }
+        let expectedOutput = ['', '#', '##', '###', '####', '#####'];
+
+        expect(_.map(input, inputMapper)).toEqual(expectedOutput);
     });
 });
