@@ -2,11 +2,21 @@ const { _ } = require('../higher-order.js');
 
 describe('_.map', () => {
     test('throws a typeError if the provided object to be mapped isn\'t an array', () => {
+        let input = null;
+        let inputMapper = null;
 
+        expect(() => {
+            _.map(input, inputMapper);
+        }).toThrow();
     });
 
     test('throws a typeError if the provided mapper isn\'t a function value', () => {
+        let input = [];
+        let inputMapper = null;
 
+        expect(() => {
+            _.map(input, inputMapper);
+        }).toThrow();
     });
 
     test('maps an empty array and returns an empty array object', () => {

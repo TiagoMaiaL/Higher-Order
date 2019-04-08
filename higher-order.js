@@ -10,7 +10,19 @@ const _ = {
      * @returns {Array} mappedArray - The mapped array.
      */
     map: function(arr, mapper) {
-        return [];
+        if (typeof arr != 'object' || !Array.isArray(arr)) {
+            throw new TypeError('The passed array to be mapped must be a valid one.');
+        }
+
+        if (typeof mapper != 'function') {
+            throw new TypeError('The passed mapper closure must be a valid one.');
+        }
+
+        let mapped = [];
+
+        // ...
+
+        return mapped;
     }
 }
 
