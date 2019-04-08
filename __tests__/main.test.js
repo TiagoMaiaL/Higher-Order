@@ -90,10 +90,19 @@ describe('_.reduce', () => {
     });
 
     test('returns the initial value if the passed array is empty', () => {
+        const input = [];
+        const reducerInput = () => {};
+        const initialValueInput = 'this should be returned.';
 
+        expect(_.reduce(input, reducerInput, initialValueInput)).toEqual(initialValueInput);
     });
 
     test('throws an error if no initial value is passed and the array to reduce is empty', () => {
-
+        const input = [];
+        const reducerInput = () => {};
+        
+        expect(() => {
+            _.reduce(input, reducerInput);
+        }).toThrow();
     });
 });

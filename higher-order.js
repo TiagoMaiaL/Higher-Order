@@ -18,6 +18,16 @@ const _ = {
         if (typeof reducer != 'function') {
             throw new TypeError('The passed reducer argument must be avalid function.');
         }
+
+        let result = initialValue || arr[0];
+
+        if (!result) {
+            throw new Error('If the passed array argument is empty, an initial value argument must be provided.');
+        }
+
+        // TODO...
+
+        return result;
     },
 
     /**
