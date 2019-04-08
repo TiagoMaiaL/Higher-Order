@@ -2,8 +2,8 @@ const { _ } = require('../higher-order.js');
 
 describe('_.map', () => {
     test('throws a typeError if the provided object to be mapped isn\'t an array', () => {
-        let input = null;
-        let inputMapper = null;
+        const input = null;
+        const inputMapper = null;
 
         expect(() => {
             _.map(input, inputMapper);
@@ -11,8 +11,8 @@ describe('_.map', () => {
     });
 
     test('throws a typeError if the provided mapper isn\'t a function value', () => {
-        let input = [];
-        let inputMapper = null;
+        const input = [];
+        const inputMapper = null;
 
         expect(() => {
             _.map(input, inputMapper);
@@ -20,17 +20,17 @@ describe('_.map', () => {
     });
 
     test('maps an empty array and returns an empty array object', () => {
-        let input = [];
-        let inputMapper = () => {};
-        let expectedOutput = [];
+        const input = [];
+        const inputMapper = () => {};
+        const expectedOutput = [];
 
         expect(_.map(input, inputMapper)).toEqual(expectedOutput);
     });
 
     test('maps every item in the provided array and returns the mapped output', () => {
-        let input = [0, 1, 2, 3, 4, 5];
-        let inputMapper = (value) => {
-            let textBarUnit = '#';
+        const input = [0, 1, 2, 3, 4, 5];
+        const inputMapper = (value) => {
+            const textBarUnit = '#';
             let textBar = ''
 
             for (let i = 0; i < value; i++) {
@@ -39,24 +39,22 @@ describe('_.map', () => {
 
             return textBar;
         }
-        let expectedOutput = ['', '#', '##', '###', '####', '#####'];
+        const expectedOutput = ['', '#', '##', '###', '####', '#####'];
 
         expect(_.map(input, inputMapper)).toEqual(expectedOutput);
     });
 
     test('map passes the current value index as the second argument to the mapper closure', () => {
-        let input = ['', '', '', '', ''];
-        let mapperInput = (value, index) => {
-            return index;
-        }
-        let expectedOutput = [0, 1, 2, 3, 4];
+        const input = ['', '', '', '', ''];
+        const mapperInput = (value, index) => index;
+        const expectedOutput = [0, 1, 2, 3, 4];
 
         expect(_.map(input, mapperInput)).toEqual(expectedOutput);
     });
 
     test('map passes the source array as the last argument to the mapper closure', () => {
-        let input = [0, 1, 2, 3, 4, 5, 6];
-        let mapperInput = (value, index, arr) => {
+        const input = [0, 1, 2, 3, 4, 5, 6];
+        const mapperInput = (value, index, arr) => {
             switch (index) {
                 case 0:
                     return '*';
@@ -66,7 +64,7 @@ describe('_.map', () => {
                     return value;
             }
         }
-        let expectedOutput = ['*', 1, 2, 3, 4, 5, '*'];
+        const expectedOutput = ['*', 1, 2, 3, 4, 5, '*'];
 
         expect(_.map(input, mapperInput)).toEqual(expectedOutput);
     });
