@@ -72,11 +72,21 @@ describe('_.map', () => {
 
 describe('_.reduce', () => {
     test('throws an error if the passed array isn\'t a valid one', () => {
+        const input = null;
+        const reducerInput = (previous, current) => previous + current;
 
+        expect(() => {
+            _.reduce(input, reducerInput);
+        }).toThrow();
     });
 
     test('throws an error if the passed reducer isn\'t a valid function', () => {
+        const input = [0, 1, 2, 3, 4, 5];
+        const reducerInput = null;
 
+        expect(() => {
+            _.reduce(input, reducerInput);
+        }).toThrow();
     });
 
     test('returns the initial value if the passed array is empty', () => {

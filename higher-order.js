@@ -11,7 +11,13 @@ const _ = {
      * @param {Any} initialValue 
      */
     reduce: function(arr, reducer, initialValue) {
+        if (typeof arr != 'object' || !(arr instanceof Array)) {
+            throw new TypeError('The passed array argument must be a valid one.');
+        }
 
+        if (typeof reducer != 'function') {
+            throw new TypeError('The passed reducer argument must be avalid function.');
+        }
     },
 
     /**
