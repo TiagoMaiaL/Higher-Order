@@ -4,6 +4,17 @@
  */
 const _ = {
     /**
+     * Given an array and a reducer function, returns the single value from calling 
+     * reducer on each element of the array and accumulating the result.
+     * @param {Array} arr 
+     * @param {Function} reducer 
+     * @param {Any} initialValue 
+     */
+    reduce: function(arr, reducer, initialValue) {
+
+    },
+
+    /**
      * Given an array and a mapper closure, returns a transformed array based the mapper being applied to each original array elements.
      * @param {Array} arr - The array to be mapped into another array of mapped values. 
      * @param {Function} mapper - The function being applied to map each value of the original array.

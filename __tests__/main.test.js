@@ -71,3 +71,21 @@ describe('_.map', () => {
         expect(_.map(input, mapperInput)).toEqual(expectedOutput);
     });
 });
+
+describe('_.reduce', () => {
+    test('throws an error if the passed array isn\'t a valid one', () => {
+
+    });
+
+    test('throws an error if the passed reducer isn\'t a valid function', () => {
+
+    });
+
+    test('returns the initial value if the passed array is empty', () => {
+
+    });
+
+    test('throws an error if no initial value is passed and the array to reduce is empty', () => {
+
+    });
+});
