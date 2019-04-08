@@ -132,4 +132,21 @@ describe('_.reduce', () => {
 
         expect(_.reduce(input, reducerInput)).toEqual(expectedOutput);
     });
+
+    test('reduce passes the 1st and 2nd array values to the reducer in the first run, if the initial value is null', () => {
+        const input = [5, 6, 7, 8];
+        const reducerInput = (previous, current) => previous + current;
+        const expectedOutput = 26;
+
+        expect(_.reduce(input, reducerInput)).toEqual(expectedOutput);
+    });
+
+    test('reduce passes the initial value and the 1st array value to the reducer in the first run, if the initial value is provided', () => {
+        const input = [5, 6, 7, 8];
+        const reducerInput = (previous, current) => previous + current;
+        const initialValueInput = 4;
+        const expectedOutput = 30;
+
+        expect(_.reduce(input, reducerInput, initialValueInput)).toEqual(expectedOutput);
+    });
 });

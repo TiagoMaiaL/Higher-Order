@@ -19,13 +19,24 @@ const _ = {
             throw new TypeError('The passed reducer argument must be avalid function.');
         }
 
-        let result = initialValue || arr[0];
-
-        if (arr.length == 0 && !result) {
+        if (arr.length == 0 && !initialValue) {
             throw new Error('If the passed array argument is empty, an initial value argument must be provided.');
         }
 
-        for (let i = 0; i < arr.length; i++) {
+        // If there's an initial value, the current value to reduce should be the first array value.
+        let i = 0
+        let result;
+
+        // If there's an initial value, it's used in the reduction, and reduce start at 0.
+        if (initialValue) {
+            result = initialValue;
+        } else {
+            // Otherwise, reduce uses the two first arguments as values:
+            i = 1;
+            result = arr[0];
+        }
+
+        for (; i < arr.length; i++) {
             result = reducer(result, arr[i], i, arr);
         }
 
