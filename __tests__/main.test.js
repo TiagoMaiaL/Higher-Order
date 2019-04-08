@@ -44,12 +44,29 @@ describe('_.map', () => {
         expect(_.map(input, inputMapper)).toEqual(expectedOutput);
     });
 
-    test('maps every item in the provided array based on its index', () => {
+    test('map passes the current value index as the second argument to the mapper closure', () => {
         let input = ['', '', '', '', ''];
         let mapperInput = (value, index) => {
             return index;
         }
         let expectedOutput = [0, 1, 2, 3, 4];
+
+        expect(_.map(input, mapperInput)).toEqual(expectedOutput);
+    });
+
+    test('map passes the source array as the last argument to the mapper closure', () => {
+        let input = [0, 1, 2, 3, 4, 5, 6];
+        let mapperInput = (value, index, arr) => {
+            switch (index) {
+                case 0:
+                    return '*';
+                case arr.length - 1:
+                    return '*';
+                default:
+                    return value;
+            }
+        }
+        let expectedOutput = ['*', 1, 2, 3, 4, 5, '*'];
 
         expect(_.map(input, mapperInput)).toEqual(expectedOutput);
     });
