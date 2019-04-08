@@ -1,8 +1,19 @@
 const { _ } = require('higher-order-.js');
 
 describe('_.map', () => {
-    test('it maps every item in the provided array and returns the mapped output', () => {
+    test('maps an empty array and returns an empty array object', () => {
+
+    });
+
+    test('throws a typeError if the provided object to be mapped isn\'t an array', () => {
+
+    });
+
+    test('throws a typeError if the provided mapper isn\'t a function value', () => {
+
+    });
+
+    test('maps every item in the provided array and returns the mapped output', () => {
 
     });
 });
-
