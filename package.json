@@ -1,6 +1,9 @@
 {
     "name": "higher-order",
     "main": "higher-order.js",
+    "devDependencies": {
+        "jest": "^24.5.0"
+    },
     "scripts" : {
         "start": "node higher-order.js",
         "test": "jest"
