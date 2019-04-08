@@ -58,13 +58,10 @@ const _ = {
             throw new TypeError('The passed mapper closure must be a valid one.');
         }
 
-        let mapped = [];
-
-        for (let i = 0; i < arr.length; i++) {
-            mapped.push(mapper(arr[i], i, arr));
-        }
-
-        return mapped;
+        return this.reduce(arr, (previous, current, index, array) => {
+            previous.push(mapper(current, index, array));
+            return previous;
+        }, []);
     }
 }
 

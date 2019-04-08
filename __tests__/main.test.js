@@ -46,7 +46,7 @@ describe('_.map', () => {
 
     test('map passes the current value index as the second argument to the mapper closure', () => {
         const input = ['', '', '', '', ''];
-        const mapperInput = (value, index) => index;
+        const mapperInput = (_value, index) => index;
         const expectedOutput = [0, 1, 2, 3, 4];
 
         expect(_.map(input, mapperInput)).toEqual(expectedOutput);
