@@ -43,4 +43,14 @@ describe('_.map', () => {
 
         expect(_.map(input, inputMapper)).toEqual(expectedOutput);
     });
+
+    test('maps every item in the provided array based on its index', () => {
+        let input = ['', '', '', '', ''];
+        let mapperInput = (value, index) => {
+            return index;
+        }
+        let expectedOutput = [0, 1, 2, 3, 4];
+
+        expect(_.map(input, mapperInput)).toEqual(expectedOutput);
+    });
 });
