@@ -151,5 +151,20 @@ describe('_.map', () => {
 });
 
 describe('_.filter', () => {
+    test('throws an error if the filter applier is not a valid function.', () => {
+        expect(() => _.filter([1, 2, 3], null)).toThrow(TypeError);
+    });
 
+    test('returns an empty array if an empty one is passed to filter', () => {
+        const input = [];
+        const filterApplier = x => true;
+        expect(_.filter(input, filterApplier)).toEqual([]);
+    });
+
+    test('filters the passed array based on the passed applier closure.', () => {
+        const input = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const filterApplier = x => x > 5;
+
+        expect(_.filter(input, filterApplier)).toEqual([6, 7, 8, 9, 10]);
+    });
 });
