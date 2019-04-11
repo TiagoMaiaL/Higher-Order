@@ -140,4 +140,12 @@ describe('_.reduce', () => {
 
         expect(_.reduce(input, reducerInput, initialValueInput)).toEqual(expectedOutput);
     });
+
+    test('reduce uses the initial value unless it\'s undefined or null', () => {
+        const input = [true];
+        const reducerInput = (x, y) => x && y;
+        const initialValueInput = false;
+
+        expect(_.reduce(input, reducerInput, initialValueInput)).toEqual(false);
+    });
 });

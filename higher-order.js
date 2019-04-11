@@ -27,8 +27,8 @@ const _ = {
         let i = 0
         let result;
 
-        // If there's an initial value, it's used in the reduction, and reduce starts at 0.
-        if (initialValue) {
+        // If there's an initial value, it's used in the reduction, and reduce starts at index 0.
+        if (initialValue !== null && initialValue !== undefined) {
             result = initialValue;
         } else {
             // Otherwise, reduce uses the two first arguments as values:
