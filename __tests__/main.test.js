@@ -7,7 +7,7 @@ describe('_.map', () => {
 
         expect(() => {
             _.map(input, inputMapper);
-        }).toThrow();
+        }).toThrow(TypeError);
     });
 
     test('throws a typeError if the provided mapper isn\'t a function value', () => {
@@ -16,7 +16,7 @@ describe('_.map', () => {
 
         expect(() => {
             _.map(input, inputMapper);
-        }).toThrow();
+        }).toThrow(TypeError);
     });
 
     test('maps an empty array and returns an empty array object', () => {
@@ -29,16 +29,7 @@ describe('_.map', () => {
 
     test('maps every item in the provided array and returns the mapped output', () => {
         const input = [0, 1, 2, 3, 4, 5];
-        const inputMapper = (value) => {
-            const textBarUnit = '#';
-            let textBar = ''
-
-            for (let i = 0; i < value; i++) {
-                textBar += textBarUnit;
-            }
-
-            return textBar;
-        }
+        const inputMapper = (length) => '#'.repeat(length);
         const expectedOutput = ['', '#', '##', '###', '####', '#####'];
 
         expect(_.map(input, inputMapper)).toEqual(expectedOutput);
@@ -77,7 +68,7 @@ describe('_.reduce', () => {
 
         expect(() => {
             _.reduce(input, reducerInput);
-        }).toThrow();
+        }).toThrow(TypeError);
     });
 
     test('throws an error if the passed reducer isn\'t a valid function', () => {
@@ -86,7 +77,7 @@ describe('_.reduce', () => {
 
         expect(() => {
             _.reduce(input, reducerInput);
-        }).toThrow();
+        }).toThrow(TypeError);
     });
 
     test('returns the initial value if the passed array is empty', () => {
@@ -103,7 +94,7 @@ describe('_.reduce', () => {
         
         expect(() => {
             _.reduce(input, reducerInput);
-        }).toThrow();
+        }).toThrow(Error);
     });
 
     test('reduces an array into a value',() => {
@@ -148,5 +139,13 @@ describe('_.reduce', () => {
         const expectedOutput = 30;
 
         expect(_.reduce(input, reducerInput, initialValueInput)).toEqual(expectedOutput);
+    });
+
+    test('reduce uses the initial value unless it\'s undefined or null', () => {
+        const input = [true];
+        const reducerInput = (x, y) => x && y;
+        const initialValueInput = false;
+
+        expect(_.reduce(input, reducerInput, initialValueInput)).toEqual(false);
     });
 });

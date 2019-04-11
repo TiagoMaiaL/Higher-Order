@@ -11,7 +11,7 @@ const _ = {
      * @param {Any} initialValue 
      */
     reduce: function(arr, reducer, initialValue) {
-        if (typeof arr != 'object' || !(arr instanceof Array)) {
+        if (!Array.isArray(arr)) {
             throw new TypeError('The passed array argument must be a valid one.');
         }
 
@@ -27,8 +27,8 @@ const _ = {
         let i = 0
         let result;
 
-        // If there's an initial value, it's used in the reduction, and reduce start at 0.
-        if (initialValue) {
+        // If there's an initial value, it's used in the reduction, and reduce starts at index 0.
+        if (initialValue !== null && initialValue !== undefined) {
             result = initialValue;
         } else {
             // Otherwise, reduce uses the two first arguments as values:
@@ -50,10 +50,6 @@ const _ = {
      * @returns {Array} mappedArray - The mapped array.
      */
     map: function(arr, mapper) {
-        if (typeof arr != 'object' || !Array.isArray(arr)) {
-            throw new TypeError('The passed array to be mapped must be a valid one.');
-        }
-
         if (typeof mapper != 'function') {
             throw new TypeError('The passed mapper closure must be a valid one.');
         }
