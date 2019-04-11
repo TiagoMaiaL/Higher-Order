@@ -58,6 +58,16 @@ const _ = {
             previous.push(mapper(current, index, array));
             return previous;
         }, []);
+    },
+
+    /**
+     * Given an array and a closure applying a filter, returns an array with the filtered elements of the original passed array.
+     * @param {Array} arr - The array to be filtered.
+     * @param {*} filterApplier - The function in charge of deciding if a value should be included in the filtered array.
+     * @returns {Array} filteredArray - The filtered array.
+     */
+    filter: function(arr, filterApplier) {
+        // TODO:
     }
 }
 

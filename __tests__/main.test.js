@@ -149,3 +149,7 @@ describe('_.map', () => {
         expect(_.map(input, mapperInput)).toEqual(expectedOutput);
     });
 });
+
+describe('_.filter', () => {
+
+});
