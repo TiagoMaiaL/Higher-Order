@@ -58,6 +58,26 @@ const _ = {
             previous.push(mapper(current, index, array));
             return previous;
         }, []);
+    },
+
+    /**
+     * Given an array and a closure applying a filter, returns an array with the filtered elements of the original passed array.
+     * @param {Array} arr - The array to be filtered.
+     * @param {Function} filterApplier - The function in charge of deciding if a value should be included in the filtered array.
+     * @returns {Array} filteredArray - The filtered array.
+     */
+    filter: function(arr, filterApplier) {
+        if (typeof filterApplier !== 'function') {
+            throw new TypeError('The filter applier must be a valid closure.');
+        }
+
+        return this.reduce(arr, (previous, element) => {
+            if (filterApplier(element) === true) {
+                previous.push(element);
+            }
+
+            return previous;
+        }, []);
     }
 }
 
