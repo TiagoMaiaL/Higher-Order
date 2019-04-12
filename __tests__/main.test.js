@@ -170,5 +170,19 @@ describe('_.filter', () => {
 });
 
 describe('_.all', () => {
-    
+    test('returns false if the array is empty.', () => {
+        expect(_.all([], (element) => true)).toEqual(false);
+    });
+
+    test('throws an error if the array to be checked isn\'t a valid one.', () => {
+        expect(() => {
+            _.all(null, () => true);
+        }).toThrow(TypeError);
+    });
+
+    test('throws an error if the accounter argument isn\'t a valid function.', () => {
+        expect(() => { 
+            _.all([0], null); 
+        }).toThrow(TypeError);
+    });
 });

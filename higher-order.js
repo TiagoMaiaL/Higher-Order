@@ -87,7 +87,17 @@ const _ = {
      * @returns {Boolean} - The result of applying accounter on every element.
      */
     all: function(arr, accounter) {
-        
+        if (!Array.isArray(arr)) {
+            throw new TypeError('The passed array must be a valid one.');
+        }
+
+        if (arr.length === 0) {
+            return false;
+        }
+
+        if (typeof accounter !== 'function') {
+            throw new TypeError('The accounter function must be a valid closure.');
+        }
     }
 }
 
