@@ -185,4 +185,18 @@ describe('_.all', () => {
             _.all([0], null); 
         }).toThrow(TypeError);
     });
+
+    test('returns false if at least one element isn\'t accounted', () => {
+        const input = [0, 1, 2, 3, 4, 5];
+        const accounterInput = (element) => element !== 0;
+
+        expect(_.all(input, accounterInput)).toEqual(false);
+    });
+
+    test('returns true if all elements are accounted', () => {
+        const input = [5, 6, 7, 8, 9, 10];
+        const accounterInput = (element) => element >= 5;
+
+        expect(_.all(input, accounterInput)).toEqual(true);
+    });
 });

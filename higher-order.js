@@ -98,6 +98,10 @@ const _ = {
         if (typeof accounter !== 'function') {
             throw new TypeError('The accounter function must be a valid closure.');
         }
+
+        return this.reduce(arr, (previous, current) => {
+            return previous && accounter(current);
+        }, true)
     }
 }
 
