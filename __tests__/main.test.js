@@ -168,3 +168,7 @@ describe('_.filter', () => {
         expect(_.filter(input, filterApplier)).toEqual([6, 7, 8, 9, 10]);
     });
 });
+
+describe('_.all', () => {
+    
+});

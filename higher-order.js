@@ -72,12 +72,22 @@ const _ = {
         }
 
         return this.reduce(arr, (previous, element) => {
-            if (filterApplier(element) === true) {
+            if (filterApplier(element)) {
                 previous.push(element);
             }
 
             return previous;
         }, []);
+    },
+
+    /**
+     * Given an array and a function, runs the given function on every element and returns true if all elements are accounted.
+     * @param {Array} arr - The array to be checked.
+     * @param {Function} accounter - The function in charge of checking if a value should be considered.
+     * @returns {Boolean} - The result of applying accounter on every element.
+     */
+    all: function(arr, accounter) {
+        
     }
 }
 
