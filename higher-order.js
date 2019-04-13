@@ -5,7 +5,23 @@ const guardType = typeIdentifier => errorMessage => value => {
         throw new TypeError(errorMessage) 
     }
 };
+const guardObjectType = objectValidator => errorMessage => object => { 
+    if (!objectValidator(object)) {
+        throw new TypeError(errorMessage);
+    }
+}
+
+/**
+ * Given a value, checks if its a valid function and throws an error if it isn't.
+ * @param {Function} function - the function to be checked.
+ */
 const guardFunction = guardType('function')('The passed argument must be a valid function.');
+
+/**
+ * Given a value, checks if it's a valid array and throws an error if it isn't.
+ * @param {Array} arr - the array to be checked.
+ */
+const guardArray = guardObjectType((array) => Array.isArray(array))('The passed argument must be a valid array.');
 
 /**
  * The root object of the library containing the higher-order functions.
@@ -19,10 +35,7 @@ const _ = {
      * @param {Any} initialValue 
      */
     reduce: function(arr, reducer, initialValue) {
-        if (!Array.isArray(arr)) {
-            throw new TypeError('The passed array argument must be a valid one.');
-        }
-
+        guardArray(arr);
         guardFunction(reducer);
 
         if (arr.length == 0 && !initialValue) {
@@ -89,10 +102,8 @@ const _ = {
      * @returns {Boolean} - The result of applying accounter on every element.
      */
     all: function(arr, accounter) {
-        if (!Array.isArray(arr)) {
-            throw new TypeError('The passed array must be a valid one.');
-        }
-
+        guardArray(arr);
+        
         if (arr.length === 0) {
             return false;
         }
@@ -111,10 +122,7 @@ const _ = {
      * @returns {Boolean} - returns true if any element in the array is accounted.
      */
     any: function(arr, accounter) {
-        if (!Array.isArray(arr)) {
-            throw new TypeError('The passed array must be a valid one.');
-        }
-
+        guardArray(arr);
         guardFunction(accounter);
 
         return this.reduce(arr, (previous, current) => {
