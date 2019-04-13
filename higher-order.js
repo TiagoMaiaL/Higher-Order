@@ -106,6 +106,14 @@ const _ = {
     },
 
     /**
+     * Given an array, returns the biggest element of it.
+     * @param {Array} arr - the array with the elements to be compared.
+     */
+    max(arr) {
+        
+    },
+
+    /**
      * Given an array and a function, runs the given function on every element and returns true if all elements are accounted.
      * @param {Array} arr - The array to be checked.
      * @param {Function} accounter - The function in charge of checking if a value should be considered.

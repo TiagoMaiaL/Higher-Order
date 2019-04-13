@@ -188,6 +188,10 @@ describe('_.reject', () => {
     });
 });
 
+describe('_.max', () => {
+    
+});
+
 describe('_.all', () => {
     test('returns false if the array is empty.', () => {
         expect(_.all([], (element) => true)).toEqual(false);
