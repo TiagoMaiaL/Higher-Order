@@ -219,7 +219,13 @@ describe('_.max', () => {
 });
 
 describe('_.min', () => {
-    
+    test('throws an error if the array is not a valid one.', () => {
+        expect(() => _.min(null)).toThrow(TypeError);
+    });
+
+    test('returns undefined if an empty array is passed.', () => {
+        expect(_.min([])).toEqual(undefined);
+    });
 });
 
 describe('_.all', () => {

@@ -122,7 +122,11 @@ const _ = {
      * @param {Array} arr - the array with the elements to be compared.
      */
     min: function(arr) {
-        
+        guardArray(arr);
+
+        if (arr.length === 0) {
+            return undefined;
+        }
     },
 
     /**
