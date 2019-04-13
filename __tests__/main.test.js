@@ -196,6 +196,26 @@ describe('_.max', () => {
     test('returns undefined if an empty array is passed.', () => {
         expect(_.max([])).toEqual(undefined);
     });
+
+    test('returns the largest element out of numbers.', () => {
+        expect(_.max([0, 1, 2, 3, 4, 5])).toEqual(5);
+    });
+
+    test('returns the largest repeated element out of numbers.', () => {
+        expect(_.max([0, 0, 0, 0, 0])).toEqual(0);
+    });
+
+    test('returns the largest string out of strings', () => {
+        expect(_.max(['s', 'st', 'str', 'string'])).toEqual('string');
+    });
+
+    test('returns true element out of booleans.', () => {
+        expect(_.max([true, false, true])).toEqual(true);
+    });
+
+    test('returns null if null and undefined are compared.', () => {
+        expect(_.max([null, undefined, null])).toEqual(null);
+    });
 });
 
 describe('_.all', () => {
