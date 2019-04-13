@@ -106,6 +106,30 @@ const _ = {
     },
 
     /**
+     * Given an array, returns the largest element of it.
+     * @param {Array} arr - the array with the elements to be compared.
+     */
+    max: function(arr) {
+        if (arr.length === 0) {
+            return undefined;
+        }
+
+        return this.reduce(arr, (previous, current) => previous > current ? previous : current);
+    },
+
+    /**
+     * Given an array, returns the smallest element of it.
+     * @param {Array} arr - the array with the elements to be compared.
+     */
+    min: function(arr) {
+        if (arr.length === 0) {
+            return undefined;
+        }
+
+        return this.reduce(arr, (previous, current) => previous < current ? previous : current);
+    },
+
+    /**
      * Given an array and a function, runs the given function on every element and returns true if all elements are accounted.
      * @param {Array} arr - The array to be checked.
      * @param {Function} accounter - The function in charge of checking if a value should be considered.

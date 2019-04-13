@@ -188,6 +188,66 @@ describe('_.reject', () => {
     });
 });
 
+describe('_.max', () => {
+    test('throws an error if the array is not a valid one.', () => {
+        expect(() => _.max(null)).toThrow(TypeError);
+    });
+
+    test('returns undefined if an empty array is passed.', () => {
+        expect(_.max([])).toEqual(undefined);
+    });
+
+    test('returns the largest element out of numbers.', () => {
+        expect(_.max([0, 1, 2, 3, 4, 5])).toEqual(5);
+    });
+
+    test('returns the largest repeated element out of numbers.', () => {
+        expect(_.max([0, 0, 0, 0, 0])).toEqual(0);
+    });
+
+    test('returns the largest string out of strings', () => {
+        expect(_.max(['s', 'st', 'str', 'string'])).toEqual('string');
+    });
+
+    test('returns true element out of booleans.', () => {
+        expect(_.max([true, false, true])).toEqual(true);
+    });
+
+    test('returns null if null and undefined are compared.', () => {
+        expect(_.max([null, undefined, null])).toEqual(null);
+    });
+});
+
+describe('_.min', () => {
+    test('throws an error if the array is not a valid one.', () => {
+        expect(() => _.min(null)).toThrow(TypeError);
+    });
+
+    test('returns undefined if an empty array is passed.', () => {
+        expect(_.min([])).toEqual(undefined);
+    });
+
+    test('returns the smallest element out of numbers.', () => {
+        expect(_.min([0, 1, 2, 3, 4, 5])).toEqual(0);
+    });
+
+    test('returns the smallest repeated element out of numbers.', () => {
+        expect(_.min([0, 5, 4, 0, 0])).toEqual(0);
+    });
+
+    test('returns the smallest string out of strings', () => {
+        expect(_.min(['s', 'st', 'str', 'string'])).toEqual('s');
+    });
+
+    test('returns the false element out of booleans.', () => {
+        expect(_.min([true, false, true])).toEqual(false);
+    });
+
+    test('returns null if null and undefined are compared.', () => {
+        expect(_.min([null, undefined, null])).toEqual(null);
+    });
+});
+
 describe('_.all', () => {
     test('returns false if the array is empty.', () => {
         expect(_.all([], (element) => true)).toEqual(false);
