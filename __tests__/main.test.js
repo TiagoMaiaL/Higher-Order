@@ -168,3 +168,67 @@ describe('_.filter', () => {
         expect(_.filter(input, filterApplier)).toEqual([6, 7, 8, 9, 10]);
     });
 });
+
+describe('_.all', () => {
+    test('returns false if the array is empty.', () => {
+        expect(_.all([], (element) => true)).toEqual(false);
+    });
+
+    test('throws an error if the array to be checked isn\'t a valid one.', () => {
+        expect(() => {
+            _.all(null, () => true);
+        }).toThrow(TypeError);
+    });
+
+    test('throws an error if the accounter argument isn\'t a valid function.', () => {
+        expect(() => { 
+            _.all([0], null); 
+        }).toThrow(TypeError);
+    });
+
+    test('returns false if at least one element isn\'t accounted', () => {
+        const input = [0, 1, 2, 3, 4, 5];
+        const accounterInput = (element) => element !== 0;
+
+        expect(_.all(input, accounterInput)).toEqual(false);
+    });
+
+    test('returns true if all elements are accounted', () => {
+        const input = [5, 6, 7, 8, 9, 10];
+        const accounterInput = (element) => element >= 5;
+
+        expect(_.all(input, accounterInput)).toEqual(true);
+    });
+});
+
+describe('_.any', () => {
+    test('returns false if the array is empty.', () => {
+        expect(_.all([], (element) => true)).toEqual(false);
+    });
+
+    test('throws an error if the array to be checked isn\'t a valid one.', () => {
+        expect(() => {
+            _.any(null, () => true);
+        }).toThrow(TypeError);
+    });
+
+    test('throws an error if the accounter argument isn\'t a valid function.', () => {
+        expect(() => { 
+            _.any([0], null); 
+        }).toThrow(TypeError);
+    });
+
+    test('returns true if any element is accounted', () => {
+        const input = [5, 6, 7, 8, 9, 10];
+        const accounterInput = (element) => element == 10;
+
+        expect(_.any(input, accounterInput)).toEqual(true);
+    });
+
+    test('returns false if no element can be accounted', () => {
+        const input = [5, 6, 7, 8, 9, 10];
+        const accounterInput = (element) => element < 5;
+
+        expect(_.any(input, accounterInput)).toEqual(false);
+    });
+});

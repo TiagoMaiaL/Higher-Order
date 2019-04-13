@@ -1,3 +1,27 @@
+'use strict';
+
+const guardType = typeIdentifier => errorMessage => value => { 
+    if (typeof value !== typeIdentifier) {
+        throw new TypeError(errorMessage) 
+    }
+};
+const guardObjectType = objectValidator => errorMessage => object => { 
+    if (!objectValidator(object)) {
+        throw new TypeError(errorMessage);
+    }
+}
+
+/**
+ * Given a value, checks if its a valid function and throws an error if it isn't.
+ * @param {Function} function - the function to be checked.
+ */
+const guardFunction = guardType('function')('The passed argument must be a valid function.');
+
+/**
+ * Given a value, checks if it's a valid array and throws an error if it isn't.
+ * @param {Array} arr - the array to be checked.
+ */
+const guardArray = guardObjectType((array) => Array.isArray(array))('The passed argument must be a valid array.');
 
 /**
  * The root object of the library containing the higher-order functions.
@@ -11,13 +35,8 @@ const _ = {
      * @param {Any} initialValue 
      */
     reduce: function(arr, reducer, initialValue) {
-        if (!Array.isArray(arr)) {
-            throw new TypeError('The passed array argument must be a valid one.');
-        }
-
-        if (typeof reducer != 'function') {
-            throw new TypeError('The passed reducer argument must be avalid function.');
-        }
+        guardArray(arr);
+        guardFunction(reducer);
 
         if (arr.length == 0 && !initialValue) {
             throw new Error('If the passed array argument is empty, an initial value argument must be provided.');
@@ -50,10 +69,8 @@ const _ = {
      * @returns {Array} mappedArray - The mapped array.
      */
     map: function(arr, mapper) {
-        if (typeof mapper != 'function') {
-            throw new TypeError('The passed mapper closure must be a valid one.');
-        }
-
+        guardFunction(mapper);
+        
         return this.reduce(arr, (previous, current, index, array) => {
             previous.push(mapper(current, index, array));
             return previous;
@@ -67,18 +84,52 @@ const _ = {
      * @returns {Array} filteredArray - The filtered array.
      */
     filter: function(arr, filterApplier) {
-        if (typeof filterApplier !== 'function') {
-            throw new TypeError('The filter applier must be a valid closure.');
-        }
-
+        guardFunction(filterApplier);
+        
         return this.reduce(arr, (previous, element) => {
-            if (filterApplier(element) === true) {
+            if (filterApplier(element)) {
                 previous.push(element);
             }
 
             return previous;
         }, []);
+    },
+
+    /**
+     * Given an array and a function, runs the given function on every element and returns true if all elements are accounted.
+     * @param {Array} arr - The array to be checked.
+     * @param {Function} accounter - The function in charge of checking if a value should be considered.
+     * @returns {Boolean} - The result of applying accounter on every element.
+     */
+    all: function(arr, accounter) {
+        guardArray(arr);
+        
+        if (arr.length === 0) {
+            return false;
+        }
+
+        guardFunction(accounter);
+
+        return this.reduce(arr, (previous, current) => {
+            return previous && accounter(current);
+        }, true)
+    },
+
+    /**
+     * Given an array and a function, runs the given function on every element and returns true if any element can be accounted.
+     * @param {Array} arr - The array to be checked.
+     * @param {Function} accounter - The function in charge of checking if a value should be considered.
+     * @returns {Boolean} - returns true if any element in the array is accounted.
+     */
+    any: function(arr, accounter) {
+        guardArray(arr);
+        guardFunction(accounter);
+
+        return this.reduce(arr, (previous, current) => {
+            return previous || accounter(current);
+        }, false)
     }
+
 }
 
 module.exports = { _ };
