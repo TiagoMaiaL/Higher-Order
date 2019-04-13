@@ -102,7 +102,18 @@ const _ = {
         return this.reduce(arr, (previous, current) => {
             return previous && accounter(current);
         }, true)
+    },
+
+    /**
+     * Given an array and a function, runs the given function on every element and returns true if any element can be accounted.
+     * @param {Array} arr - The array to be checked.
+     * @param {Function} accounter - The function in charge of checking if a value should be considered.
+     * @returns {Boolean} - returns true if any element in the array is accounted.
+     */
+    any: function(arr, accounter) {
+        
     }
+
 }
 
 module.exports = { _ };

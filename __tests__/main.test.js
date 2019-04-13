@@ -200,3 +200,7 @@ describe('_.all', () => {
         expect(_.all(input, accounterInput)).toEqual(true);
     });
 });
+
+describe('_.any', () => {
+    
+});
