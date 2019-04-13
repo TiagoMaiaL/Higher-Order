@@ -102,7 +102,7 @@ const _ = {
      * @returns {Array} filteredArray - The filtered array.
      */
     reject: function(arr, rejectionApplier) {
-    
+        return this.filter(arr, (val) => !rejectionApplier(val));
     },
 
     /**
