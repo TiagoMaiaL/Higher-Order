@@ -1,3 +1,5 @@
+'use strict';
+
 const { _ } = require('../higher-order.js');
 
 describe('_.reduce', () => {
@@ -249,7 +251,17 @@ describe('_.min', () => {
 });
 
 describe('_.maxBy', () => {
-    
+    test('throws an error if the array is not a valid one.', () => {
+        expect(() => _.maxBy(null)).toThrow(TypeError);
+    });
+
+    test('throws an error if the comparator function isn\'t valid.', () => {
+        expect(() => _.maxBy([1, 2], null)).toThrow(TypeError);
+    });
+
+    test('returns undefined if an empty array is passed.', () => {
+        expect(_.maxBy([], () => true)).toEqual(undefined);
+    });
 });
 
 describe('_.all', () => {

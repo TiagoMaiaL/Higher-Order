@@ -135,7 +135,12 @@ const _ = {
      * @param {Function} comparator - the closure in charge of returning the largest of two elements.
      */
     maxBy: function(arr, comparator) {
-        
+        guardArray(arr);
+        guardFunction(comparator);
+
+        if (arr.length === 0) {
+            return undefined;
+        }
     },
 
     /**
