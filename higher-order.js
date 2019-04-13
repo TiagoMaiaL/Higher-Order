@@ -130,6 +130,15 @@ const _ = {
     },
 
     /**
+     * Given an array, runs comparator with all elements and returns the largest returned from it.
+     * @param {Array} arr - the array with the elements to be compared.
+     * @param {Function} comparator - the closure in charge of returning the largest of two elements.
+     */
+    maxBy: function(arr, comparator) {
+        
+    },
+
+    /**
      * Given an array and a function, runs the given function on every element and returns true if all elements are accounted.
      * @param {Array} arr - The array to be checked.
      * @param {Function} accounter - The function in charge of checking if a value should be considered.

@@ -248,6 +248,10 @@ describe('_.min', () => {
     });
 });
 
+describe('_.maxBy', () => {
+    
+});
+
 describe('_.all', () => {
     test('returns false if the array is empty.', () => {
         expect(_.all([], (element) => true)).toEqual(false);
