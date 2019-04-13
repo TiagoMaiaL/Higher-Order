@@ -1,3 +1,11 @@
+'use strict';
+
+const guardType = typeIdentifier => errorMessage => value => { 
+    if (typeof value !== typeIdentifier) {
+        throw new TypeError(errorMessage) 
+    }
+};
+const guardFunction = guardType('function')('The passed argument must be a valid function.');
 
 /**
  * The root object of the library containing the higher-order functions.
@@ -15,9 +23,7 @@ const _ = {
             throw new TypeError('The passed array argument must be a valid one.');
         }
 
-        if (typeof reducer != 'function') {
-            throw new TypeError('The passed reducer argument must be avalid function.');
-        }
+        guardFunction(reducer);
 
         if (arr.length == 0 && !initialValue) {
             throw new Error('If the passed array argument is empty, an initial value argument must be provided.');
@@ -50,10 +56,8 @@ const _ = {
      * @returns {Array} mappedArray - The mapped array.
      */
     map: function(arr, mapper) {
-        if (typeof mapper != 'function') {
-            throw new TypeError('The passed mapper closure must be a valid one.');
-        }
-
+        guardFunction(mapper);
+        
         return this.reduce(arr, (previous, current, index, array) => {
             previous.push(mapper(current, index, array));
             return previous;
@@ -67,10 +71,8 @@ const _ = {
      * @returns {Array} filteredArray - The filtered array.
      */
     filter: function(arr, filterApplier) {
-        if (typeof filterApplier !== 'function') {
-            throw new TypeError('The filter applier must be a valid closure.');
-        }
-
+        guardFunction(filterApplier);
+        
         return this.reduce(arr, (previous, element) => {
             if (filterApplier(element)) {
                 previous.push(element);
@@ -95,9 +97,7 @@ const _ = {
             return false;
         }
 
-        if (typeof accounter !== 'function') {
-            throw new TypeError('The accounter function must be a valid closure.');
-        }
+        guardFunction(accounter);
 
         return this.reduce(arr, (previous, current) => {
             return previous && accounter(current);
