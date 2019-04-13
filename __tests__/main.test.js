@@ -226,6 +226,26 @@ describe('_.min', () => {
     test('returns undefined if an empty array is passed.', () => {
         expect(_.min([])).toEqual(undefined);
     });
+
+    test('returns the smallest element out of numbers.', () => {
+        expect(_.min([0, 1, 2, 3, 4, 5])).toEqual(0);
+    });
+
+    test('returns the smallest repeated element out of numbers.', () => {
+        expect(_.min([0, 5, 4, 0, 0])).toEqual(0);
+    });
+
+    test('returns the smallest string out of strings', () => {
+        expect(_.min(['s', 'st', 'str', 'string'])).toEqual('s');
+    });
+
+    test('returns the false element out of booleans.', () => {
+        expect(_.min([true, false, true])).toEqual(false);
+    });
+
+    test('returns null if null and undefined are compared.', () => {
+        expect(_.min([null, undefined, null])).toEqual(null);
+    });
 });
 
 describe('_.all', () => {
