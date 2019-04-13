@@ -96,6 +96,16 @@ const _ = {
     },
 
     /**
+     * Given an array and filter, returns a new array with elements of the original array that don't apply to the rejection closure.
+     * @param {Array} arr - The array to be filtered.
+     * @param {Function} rejectionApplier - The function in charge of deciding if a value should be included in the filtered array.
+     * @returns {Array} filteredArray - The filtered array.
+     */
+    reject: function(arr, rejectionApplier) {
+    
+    },
+
+    /**
      * Given an array and a function, runs the given function on every element and returns true if all elements are accounted.
      * @param {Array} arr - The array to be checked.
      * @param {Function} accounter - The function in charge of checking if a value should be considered.

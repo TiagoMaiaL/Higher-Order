@@ -169,6 +169,25 @@ describe('_.filter', () => {
     });
 });
 
+describe('_.reject', () => {
+    test('throws an error if the rejection applier is not a valid function.', () => {
+        expect(() => _.reject([1], null)).toThrow(TypeError);
+    });
+
+    test('returns an empty array if an empty one is passed', () => {
+        const input = [];
+        const rejectionApplier = x => true;
+        expect(_.reject(input, rejectionApplier)).toEqual([]);
+    });
+
+    test('filters the passed array based on the passed rejection closure.', () => {
+        const input = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const rejectionApplier = x => x > 5;
+
+        expect(_.reject(input, rejectionApplier)).toEqual([0, 1, 2, 3, 4, 5]);
+    });
+});
+
 describe('_.all', () => {
     test('returns false if the array is empty.', () => {
         expect(_.all([], (element) => true)).toEqual(false);
