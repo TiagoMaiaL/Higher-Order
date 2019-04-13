@@ -130,17 +130,21 @@ const _ = {
     },
 
     /**
-     * Given an array, runs comparator with all elements and returns the largest returned from it.
+     * Given an array and an iteratee closure, runs iteratee in each element and returns the criterion by which the element is ranked.
      * @param {Array} arr - the array with the elements to be compared.
-     * @param {Function} comparator - the closure in charge of returning the largest of two elements.
+     * @param {Function} iteratee - the closure in charge of returning the criterion by which the element is ranked.
      */
-    maxBy: function(arr, comparator) {
-        guardArray(arr);
-        guardFunction(comparator);
+    maxBy: function(arr, iteratee) {
+        guardFunction(iteratee);
 
         if (arr.length === 0) {
             return undefined;
         }
+
+        return this.reduce(arr, (previous, current) => {
+            const currentValue = iteratee(current);
+            return previous > currentValue ? previous : currentValue; 
+        });
     },
 
     /**

@@ -262,6 +262,10 @@ describe('_.maxBy', () => {
     test('returns undefined if an empty array is passed.', () => {
         expect(_.maxBy([], () => true)).toEqual(undefined);
     });
+
+    test('returns the maximum value from the array by using the iteratee.', () => {
+        expect(_.maxBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual(121)
+    });
 });
 
 describe('_.all', () => {
@@ -315,7 +319,7 @@ describe('_.any', () => {
 
     test('returns true if any element is accounted', () => {
         const input = [5, 6, 7, 8, 9, 10];
-        const accounterInput = (element) => element == 10;
+        const accounterInput = (element) => element === 10;
 
         expect(_.any(input, accounterInput)).toEqual(true);
     });
