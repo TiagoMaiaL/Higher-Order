@@ -202,5 +202,33 @@ describe('_.all', () => {
 });
 
 describe('_.any', () => {
-    
+    test('returns false if the array is empty.', () => {
+        expect(_.all([], (element) => true)).toEqual(false);
+    });
+
+    test('throws an error if the array to be checked isn\'t a valid one.', () => {
+        expect(() => {
+            _.any(null, () => true);
+        }).toThrow(TypeError);
+    });
+
+    test('throws an error if the accounter argument isn\'t a valid function.', () => {
+        expect(() => { 
+            _.any([0], null); 
+        }).toThrow(TypeError);
+    });
+
+    test('returns true if any element is accounted', () => {
+        const input = [5, 6, 7, 8, 9, 10];
+        const accounterInput = (element) => element == 10;
+
+        expect(_.any(input, accounterInput)).toEqual(true);
+    });
+
+    test('returns false if no element can be accounted', () => {
+        const input = [5, 6, 7, 8, 9, 10];
+        const accounterInput = (element) => element < 5;
+
+        expect(_.any(input, accounterInput)).toEqual(false);
+    });
 });

@@ -111,7 +111,15 @@ const _ = {
      * @returns {Boolean} - returns true if any element in the array is accounted.
      */
     any: function(arr, accounter) {
-        
+        if (!Array.isArray(arr)) {
+            throw new TypeError('The passed array must be a valid one.');
+        }
+
+        guardFunction(accounter);
+
+        return this.reduce(arr, (previous, current) => {
+            return previous || accounter(current);
+        }, false)
     }
 
 }
