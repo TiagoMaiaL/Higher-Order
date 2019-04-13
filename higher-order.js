@@ -106,11 +106,15 @@ const _ = {
     },
 
     /**
-     * Given an array, returns the biggest element of it.
+     * Given an array, returns the largest element of it.
      * @param {Array} arr - the array with the elements to be compared.
      */
     max(arr) {
+        guardArray(arr);
         
+        if (arr.length === 0) {
+            return undefined;
+        }
     },
 
     /**
