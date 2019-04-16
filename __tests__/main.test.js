@@ -264,7 +264,7 @@ describe('_.maxBy', () => {
     });
 
     test('returns the maximum value from the array by using the closure.', () => {
-        expect(_.maxBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual(121);
+        expect(_.maxBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual({val: 121});
     });
 });
 
@@ -282,7 +282,7 @@ describe('_.minBy', () => {
     });
 
     test('returns the minimum value from the array by using the closure.', () => {
-        expect(_.minBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual(20);
+        expect(_.minBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual({val: 20});
     });
 });
 

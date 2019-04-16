@@ -146,7 +146,12 @@ const _ = {
             return undefined;
         }
 
-        return this.reduce(arr, (previous, current) => this.max([previous, callback(current)]));
+        return this.reduce(arr, (previous, current) => {
+            const previousValue = callback(previous);
+            const currentValue = callback(current);            
+
+            return previousValue > currentValue ? previous : current;
+        });
     },
 
     /**
@@ -162,7 +167,12 @@ const _ = {
             return undefined;
         }
 
-        return this.reduce(arr, (previous, current) => this.min([previous, callback(current)]));
+        return this.reduce(arr, (previous, current) => {
+            const previousValue = callback(previous);
+            const currentValue = callback(current);
+
+            return previousValue < currentValue ? previous : current;
+        });
     },
 
     /**
