@@ -106,34 +106,6 @@ const _ = {
     },
 
     /**
-     * Given an array, returns the largest element of it.
-     * @param {Array} arr - the array with the elements to be compared.
-     */
-    max: function(arr) {
-        guardArray(arr);
-
-        if (arr.length === 0) {
-            return undefined;
-        }
-
-        return this.reduce(arr, (previous, current) => previous > current ? previous : current);
-    },
-
-    /**
-     * Given an array, returns the smallest element of it.
-     * @param {Array} arr - the array with the elements to be compared.
-     */
-    min: function(arr) {
-        guardArray(arr);
-
-        if (arr.length === 0) {
-            return undefined;
-        }
-
-        return this.reduce(arr, (previous, current) => previous < current ? previous : current);
-    },
-
-    /**
      * Given an array and a closure, runs the closure in each element and returns the criterion by which the element is 
      * ranked as the maximum value.
      * @param {Array} arr - the array with the elements to be compared.
@@ -146,7 +118,12 @@ const _ = {
             return undefined;
         }
 
-        return this.reduce(arr, (previous, current) => this.max([previous, callback(current)]));
+        return this.reduce(arr, (previous, current) => {
+            const previousValue = callback(previous);
+            const currentValue = callback(current);            
+
+            return previousValue > currentValue ? previous : current;
+        });
     },
 
     /**
@@ -162,7 +139,58 @@ const _ = {
             return undefined;
         }
 
-        return this.reduce(arr, (previous, current) => this.min([previous, callback(current)]));
+        return this.reduce(arr, (previous, current) => {
+            const previousValue = callback(previous);
+            const currentValue = callback(current);
+
+            return previousValue < currentValue ? previous : current;
+        });
+    },
+
+    /**
+     * Given an array, returns the largest element of it.
+     * @param {Array} arr - the array with the elements to be compared.
+     */
+    max: function(arr) {
+        return this.maxBy(arr, val => val);
+    },
+
+    /**
+     * Given an array, returns the smallest element of it.
+     * @param {Array} arr - the array with the elements to be compared.
+     */
+    min: function(arr) {
+        return this.minBy(arr, val => val)
+    },
+
+    /**
+     * Given an unsorted array and a callback, runs the closure in each element to get its value to rank and sort the array.
+     * @param {Array} arr - the with the elements to be sorted.
+     * @param {Function} callback - the function in charge of returning the criterion by which the element is ranked in the sort.
+     * @returns {Array} - the sorted array.
+     */
+    sortBy: function(arr, callback) {
+        guardFunction(callback);
+
+        const arrCopy = arr.slice();
+
+        return this.reduce(arr, (previous) => {
+            const minimum = this.minBy(arrCopy, callback);
+
+            arrCopy.splice(arrCopy.indexOf(minimum), 1);
+            previous.push(minimum)
+
+            return previous;
+        }, []);
+    },
+
+    /**
+     * Given an unsorted array, returns the same array with its elements in a sorted order.
+     * @param {Array} arr - the with the elements to be sorted.
+     * @returns {Array} - the sorted array.
+     */
+    sort: function(arr) {
+        return this.sortBy(arr, val => val);
     },
 
     /**

@@ -190,6 +190,42 @@ describe('_.reject', () => {
     });
 });
 
+describe('_.maxBy', () => {
+    test('throws an error if the array is not a valid one.', () => {
+        expect(() => _.maxBy(null)).toThrow(TypeError);
+    });
+
+    test('throws an error if the comparator function isn\'t valid.', () => {
+        expect(() => _.maxBy([1, 2], null)).toThrow(TypeError);
+    });
+
+    test('returns undefined if an empty array is passed.', () => {
+        expect(_.maxBy([], () => true)).toEqual(undefined);
+    });
+
+    test('returns the maximum value from the array by using the closure.', () => {
+        expect(_.maxBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual({val: 121});
+    });
+});
+
+describe('_.minBy', () => {
+    test('throws an error if the array is not a valid one.', () => {
+        expect(() => _.minBy(null)).toThrow(TypeError);
+    });
+
+    test('throws an error if the comparator function isn\'t valid.', () => {
+        expect(() => _.minBy([1, 2], null)).toThrow(TypeError);
+    });
+
+    test('returns undefined if an empty array is passed.', () => {
+        expect(_.minBy([], () => true)).toEqual(undefined);
+    });
+
+    test('returns the minimum value from the array by using the closure.', () => {
+        expect(_.minBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual({val: 20});
+    });
+});
+
 describe('_.max', () => {
     test('throws an error if the array is not a valid one.', () => {
         expect(() => _.max(null)).toThrow(TypeError);
@@ -247,42 +283,6 @@ describe('_.min', () => {
 
     test('returns null if null and undefined are compared.', () => {
         expect(_.min([null, undefined, null])).toEqual(null);
-    });
-});
-
-describe('_.maxBy', () => {
-    test('throws an error if the array is not a valid one.', () => {
-        expect(() => _.maxBy(null)).toThrow(TypeError);
-    });
-
-    test('throws an error if the comparator function isn\'t valid.', () => {
-        expect(() => _.maxBy([1, 2], null)).toThrow(TypeError);
-    });
-
-    test('returns undefined if an empty array is passed.', () => {
-        expect(_.maxBy([], () => true)).toEqual(undefined);
-    });
-
-    test('returns the maximum value from the array by using the closure.', () => {
-        expect(_.maxBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual(121);
-    });
-});
-
-describe('_.minBy', () => {
-    test('throws an error if the array is not a valid one.', () => {
-        expect(() => _.minBy(null)).toThrow(TypeError);
-    });
-
-    test('throws an error if the comparator function isn\'t valid.', () => {
-        expect(() => _.minBy([1, 2], null)).toThrow(TypeError);
-    });
-
-    test('returns undefined if an empty array is passed.', () => {
-        expect(_.minBy([], () => true)).toEqual(undefined);
-    });
-
-    test('returns the minimum value from the array by using the closure.', () => {
-        expect(_.minBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual(20);
     });
 });
 
@@ -347,5 +347,64 @@ describe('_.any', () => {
         const accounterInput = (element) => element < 5;
 
         expect(_.any(input, accounterInput)).toEqual(false);
+    });
+});
+
+describe('_.sortBy', () => {
+    test('throws an error if an unvalid array is passed.', () => {
+        expect(() => _.sortBy()).toThrow(TypeError);
+    });
+
+    test('throws an error if the passed callback isn\'t a function', () => {
+        expect(() => _.sortBy([0], null)).toThrow(TypeError);
+    });
+
+    test('returns an empty array if an empty array is passed.', () => {
+        expect(_.sortBy([], val => val)).toEqual([]);
+    });
+    
+    test('it returns an array in sorted order, by using the callback to return the desired value', () => {
+        const input = [
+            {val: 210},
+            {val: 10},
+            {val: 2},
+            {val: 120}
+        ];
+        const expectedOutput = [
+            {val: 2},
+            {val: 10},
+            {val: 120},
+            {val: 210}
+        ];
+        expect(_.sortBy(input, element => element.val)).toEqual(expectedOutput);
+    });
+});
+
+describe('_.sort', () => {
+    test('returns an empty array if an empty array is passed.', () => {
+        expect(_.sort([])).toEqual([]);
+    });
+
+    test('throws an error if an unvalid array is passed.', () => {
+        expect(() => _.sort()).toThrow(TypeError);
+    });
+    
+    test('it returns an array in sorted order', () => {
+        expect(_.sort([1, 5, 2, 0, 200, 129, 3])).toEqual([0, 1, 2, 3, 5, 129, 200]);
+    });
+
+    test('it returns an array of strings in sorted order', () => {
+        const input = [
+            'a'.repeat(10),
+            'a'.repeat(5),
+            'a'
+        ];
+        const expectedOutput = input.reverse();
+
+        expect(_.sort(input)).toEqual(expectedOutput);
+    });
+
+    test('it returns an array of booleans in sorted order', () => {
+        expect(_.sort([false, true, false])).toEqual([false, false, true]);
     });
 });
