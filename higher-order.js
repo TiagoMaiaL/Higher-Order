@@ -171,7 +171,16 @@ const _ = {
      * @returns {Array} - the sorted array.
      */
     sort: function(arr) {
-        return [];
+        const arrCopy = arr.slice();
+
+        return this.reduce(arr, (previous) => {
+            const minimum = this.min(arrCopy);
+
+            arrCopy.splice(arrCopy.indexOf(minimum), 1);
+            previous.push(minimum)
+
+            return previous;
+        }, []);
     },
 
     /**

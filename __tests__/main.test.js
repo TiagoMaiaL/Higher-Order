@@ -354,4 +354,27 @@ describe('_.sort', () => {
     test('returns an empty array if an empty array is passed.', () => {
         expect(_.sort([])).toEqual([]);
     });
+
+    test('throws an error if an unvalid array is passed.', () => {
+        expect(() => _.sort()).toThrow(TypeError);
+    });
+    
+    test('it returns an array in sorted order', () => {
+        expect(_.sort([1, 5, 2, 0, 200, 129, 3])).toEqual([0, 1, 2, 3, 5, 129, 200]);
+    });
+
+    test('it returns an array of strings in sorted order', () => {
+        const input = [
+            'a'.repeat(10),
+            'a'.repeat(5),
+            'a'
+        ];
+        const expectedOutput = input.reverse();
+
+        expect(_.sort(input)).toEqual(expectedOutput);
+    });
+
+    test('it returns an array of booleans in sorted order', () => {
+        expect(_.sort([false, true, false])).toEqual([false, false, true]);
+    });
 });
