@@ -249,8 +249,8 @@ describe('_.min', () => {
 });
 
 describe('_.all', () => {
-    test('returns false if the array is empty.', () => {
-        expect(_.all([], (element) => true)).toEqual(false);
+    test('returns true if the array is empty.', () => {
+        expect(_.all([], () => false)).toEqual(true);
     });
 
     test('throws an error if the array to be checked isn\'t a valid one.', () => {
@@ -281,8 +281,8 @@ describe('_.all', () => {
 });
 
 describe('_.any', () => {
-    test('returns false if the array is empty.', () => {
-        expect(_.all([], (element) => true)).toEqual(false);
+    test('returns true if the array is empty.', () => {
+        expect(_.all([], () => false)).toEqual(true);
     });
 
     test('throws an error if the array to be checked isn\'t a valid one.', () => {
