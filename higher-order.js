@@ -110,6 +110,8 @@ const _ = {
      * @param {Array} arr - the array with the elements to be compared.
      */
     max: function(arr) {
+        guardArray(arr);
+
         if (arr.length === 0) {
             return undefined;
         }
@@ -122,6 +124,8 @@ const _ = {
      * @param {Array} arr - the array with the elements to be compared.
      */
     min: function(arr) {
+        guardArray(arr);
+
         if (arr.length === 0) {
             return undefined;
         }
@@ -136,12 +140,6 @@ const _ = {
      * @returns {Boolean} - The result of applying accounter on every element.
      */
     all: function(arr, accounter) {
-        guardArray(arr);
-        
-        if (arr.length === 0) {
-            return false;
-        }
-
         guardFunction(accounter);
 
         return this.reduce(arr, (previous, current) => {
@@ -159,9 +157,13 @@ const _ = {
         guardArray(arr);
         guardFunction(accounter);
 
+        if (arr.length === 0) {
+            return true;
+        }
+
         return this.reduce(arr, (previous, current) => {
             return previous || accounter(current);
-        }, false)
+        }, false);
     }
 
 }
