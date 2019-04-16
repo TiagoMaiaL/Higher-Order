@@ -263,8 +263,26 @@ describe('_.maxBy', () => {
         expect(_.maxBy([], () => true)).toEqual(undefined);
     });
 
-    test('returns the maximum value from the array by using the iteratee.', () => {
-        expect(_.maxBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual(121)
+    test('returns the maximum value from the array by using the closure.', () => {
+        expect(_.maxBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual(121);
+    });
+});
+
+describe('_.minBy', () => {
+    test('throws an error if the array is not a valid one.', () => {
+        expect(() => _.minBy(null)).toThrow(TypeError);
+    });
+
+    test('throws an error if the comparator function isn\'t valid.', () => {
+        expect(() => _.minBy([1, 2], null)).toThrow(TypeError);
+    });
+
+    test('returns undefined if an empty array is passed.', () => {
+        expect(_.minBy([], () => true)).toEqual(undefined);
+    });
+
+    test('returns the minimum value from the array by using the closure.', () => {
+        expect(_.minBy([{val: 120}, {val: 121}, {val: 20}], element => element.val)).toEqual(20);
     });
 });
 

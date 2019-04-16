@@ -134,9 +134,10 @@ const _ = {
     },
 
     /**
-     * Given an array and an closure, runs the closure in each element and returns the criterion by which the element is ranked.
+     * Given an array and a closure, runs the closure in each element and returns the criterion by which the element is 
+     * ranked as the maximum value.
      * @param {Array} arr - the array with the elements to be compared.
-     * @param {Function} callback - the function in charge of returning the criterion by which the element is ranked.
+     * @param {Function} callback - the function in charge of returning the criterion by which the element is ranked as the maximum value.
      */
     maxBy: function(arr, callback) {
         guardFunction(callback);
@@ -145,10 +146,23 @@ const _ = {
             return undefined;
         }
 
-        return this.reduce(arr, (previous, current) => {
-            const currentValue = callback(current);
-            return previous > currentValue ? previous : currentValue; 
-        });
+        return this.reduce(arr, (previous, current) => this.max([previous, callback(current)]));
+    },
+
+    /**
+     * Given an array and a closure, runs the closure in each element and returns the criterion by which the element is 
+     * ranked as the minimum value.
+     * @param {Array} arr - the array with the elements to be compared.
+     * @param {Function} callback - the function in charge of returning the criterion by which the element is ranked as the minimum value.
+     */
+    minBy: function(arr, callback) {
+        guardFunction(callback);
+
+        if (arr.length === 0) {
+            return undefined;
+        }
+
+        return this.reduce(arr, (previous, current) => this.min([previous, callback(current)]));
     },
 
     /**
