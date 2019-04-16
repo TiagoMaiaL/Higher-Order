@@ -134,6 +134,39 @@ const _ = {
     },
 
     /**
+     * Given an array and a closure, runs the closure in each element and returns the criterion by which the element is 
+     * ranked as the maximum value.
+     * @param {Array} arr - the array with the elements to be compared.
+     * @param {Function} callback - the function in charge of returning the criterion by which the element is ranked as the maximum value.
+     */
+    maxBy: function(arr, callback) {
+        guardFunction(callback);
+
+        if (arr.length === 0) {
+            return undefined;
+        }
+
+        return this.reduce(arr, (previous, current) => this.max([previous, callback(current)]));
+    },
+
+    /**
+     * Given an array and a closure, runs the closure in each element and returns the criterion by which the element is 
+     * ranked as the minimum value.
+     * @param {Array} arr - the array with the elements to be compared.
+     * @param {Function} callback - the function in charge of returning the criterion by which the element is ranked as the minimum value.
+     */
+    minBy: function(arr, callback) {
+        guardFunction(callback);
+
+        if (arr.length === 0) {
+            return undefined;
+        }
+
+        return this.reduce(arr, (previous, current) => this.min([previous, callback(current)]));
+    },
+
+    /**
+     * Given an array and a function, runs the given function on every element and returns true if all elements are accounted.
      * Given an array and a callback, runs the given callback on every element and returns true if all elements are accounted.
      * @param {Array} arr - The array to be checked.
      * @param {Function} callback - The function in charge of checking if a value should be considered.
