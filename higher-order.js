@@ -30,13 +30,13 @@ const _ = {
     /**
      * Given an array and a reducer function, returns the single value from calling 
      * reducer on each element of the array and accumulating the result.
-     * @param {Array} arr 
-     * @param {Function} reducer 
-     * @param {Any} initialValue 
+     * @param {Array} arr - the array to be reduced to a single value.
+     * @param {Function} callback - the function in charge of reducing the passed arguments to a single value.
+     * @param {Any} initialValue - the optional initial value of the reduction
      */
-    reduce: function(arr, reducer, initialValue) {
+    reduce: function(arr, callback, initialValue) {
         guardArray(arr);
-        guardFunction(reducer);
+        guardFunction(callback);
 
         if (arr.length == 0 && !initialValue) {
             throw new Error('If the passed array argument is empty, an initial value argument must be provided.');
@@ -56,38 +56,38 @@ const _ = {
         }
 
         for (; i < arr.length; i++) {
-            result = reducer(result, arr[i], i, arr);
+            result = callback(result, arr[i], i, arr);
         }
 
         return result;
     },
 
     /**
-     * Given an array and a mapper closure, returns a transformed array based the mapper being applied to each original array elements.
+     * Given an array and a callback, returns a transformed array based on the callback being applied to each original array elements.
      * @param {Array} arr - The array to be mapped into another array of mapped values. 
-     * @param {Function} mapper - The function being applied to map each value of the original array.
+     * @param {Function} callback - The function being applied to map each value of the original array.
      * @returns {Array} mappedArray - The mapped array.
      */
-    map: function(arr, mapper) {
-        guardFunction(mapper);
+    map: function(arr, callback) {
+        guardFunction(callback);
         
         return this.reduce(arr, (previous, current, index, array) => {
-            previous.push(mapper(current, index, array));
+            previous.push(callback(current, index, array));
             return previous;
         }, []);
     },
 
     /**
-     * Given an array and a closure applying a filter, returns an array with the filtered elements of the original passed array.
+     * Given an array and a callback, runs the callback on each element and returns an array with the filtered elements.
      * @param {Array} arr - The array to be filtered.
-     * @param {Function} filterApplier - The function in charge of deciding if a value should be included in the filtered array.
+     * @param {Function} callback - The function in charge of deciding if a value should be included in the filtered array.
      * @returns {Array} filteredArray - The filtered array.
      */
-    filter: function(arr, filterApplier) {
-        guardFunction(filterApplier);
+    filter: function(arr, callback) {
+        guardFunction(callback);
         
         return this.reduce(arr, (previous, element) => {
-            if (filterApplier(element)) {
+            if (callback(element)) {
                 previous.push(element);
             }
 
@@ -96,13 +96,13 @@ const _ = {
     },
 
     /**
-     * Given an array and filter, returns a new array with elements of the original array that don't apply to the rejection closure.
+     * Given an array and filter, returns a new array with elements of the original array that don't apply to the callback.
      * @param {Array} arr - The array to be filtered.
-     * @param {Function} rejectionApplier - The function in charge of deciding if a value should be included in the filtered array.
+     * @param {Function} callback - The function in charge of deciding if a value should be included in the filtered array.
      * @returns {Array} filteredArray - The filtered array.
      */
-    reject: function(arr, rejectionApplier) {
-        return this.filter(arr, (val) => !rejectionApplier(val));
+    reject: function(arr, callback) {
+        return this.filter(arr, (val) => !callback(val));
     },
 
     /**
@@ -134,35 +134,35 @@ const _ = {
     },
 
     /**
-     * Given an array and a function, runs the given function on every element and returns true if all elements are accounted.
+     * Given an array and a callback, runs the given callback on every element and returns true if all elements are accounted.
      * @param {Array} arr - The array to be checked.
-     * @param {Function} accounter - The function in charge of checking if a value should be considered.
+     * @param {Function} callback - The function in charge of checking if a value should be considered.
      * @returns {Boolean} - The result of applying accounter on every element.
      */
-    all: function(arr, accounter) {
-        guardFunction(accounter);
+    all: function(arr, callback) {
+        guardFunction(callback);
 
         return this.reduce(arr, (previous, current) => {
-            return previous && accounter(current);
+            return previous && callback(current);
         }, true)
     },
 
     /**
-     * Given an array and a function, runs the given function on every element and returns true if any element can be accounted.
+     * Given an array and a callback, runs the given callback on every element and returns true if any element can be accounted.
      * @param {Array} arr - The array to be checked.
-     * @param {Function} accounter - The function in charge of checking if a value should be considered.
+     * @param {Function} callback - The function in charge of checking if a value should be considered.
      * @returns {Boolean} - returns true if any element in the array is accounted.
      */
-    any: function(arr, accounter) {
+    any: function(arr, callback) {
         guardArray(arr);
-        guardFunction(accounter);
+        guardFunction(callback);
 
         if (arr.length === 0) {
             return true;
         }
 
         return this.reduce(arr, (previous, current) => {
-            return previous || accounter(current);
+            return previous || callback(current);
         }, false);
     }
 
