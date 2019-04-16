@@ -166,6 +166,27 @@ const _ = {
     },
 
     /**
+     * Given an unsorted array and a callback, runs the closure in each element to get its value to rank and sort the array.
+     * @param {Array} arr - the with the elements to be sorted.
+     * @param {Function} callback - the function in charge of returning the criterion by which the element is ranked in the sort.
+     * @returns {Array} - the sorted array.
+     */
+    sortBy: function(arr, callback) {
+        guardFunction(callback);
+
+        const arrCopy = arr.slice();
+
+        return this.reduce(arr, (previous) => {
+            const minimum = this.minBy(arrCopy, callback);
+
+            arrCopy.splice(arrCopy.indexOf(minimum), 1);
+            previous.push(minimum)
+
+            return previous;
+        }, []);
+    },
+
+    /**
      * Given an unsorted array, returns the same array with its elements in a sorted order.
      * @param {Array} arr - the with the elements to be sorted.
      * @returns {Array} - the sorted array.

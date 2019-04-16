@@ -350,6 +350,36 @@ describe('_.any', () => {
     });
 });
 
+describe('_.sortBy', () => {
+    test('throws an error if an unvalid array is passed.', () => {
+        expect(() => _.sortBy()).toThrow(TypeError);
+    });
+
+    test('throws an error if the passed callback isn\'t a function', () => {
+        expect(() => _.sortBy([0], null)).toThrow(TypeError);
+    });
+
+    test('returns an empty array if an empty array is passed.', () => {
+        expect(_.sortBy([], val => val)).toEqual([]);
+    });
+    
+    test('it returns an array in sorted order, by using the callback to return the desired value', () => {
+        const input = [
+            {val: 210},
+            {val: 10},
+            {val: 2},
+            {val: 120}
+        ];
+        const expectedOutput = [
+            {val: 2},
+            {val: 10},
+            {val: 120},
+            {val: 210}
+        ];
+        expect(_.sortBy(input, element => element.val)).toEqual(expectedOutput);
+    });
+});
+
 describe('_.sort', () => {
     test('returns an empty array if an empty array is passed.', () => {
         expect(_.sort([])).toEqual([]);
