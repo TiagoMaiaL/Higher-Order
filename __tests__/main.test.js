@@ -349,3 +349,9 @@ describe('_.any', () => {
         expect(_.any(input, accounterInput)).toEqual(false);
     });
 });
+
+describe('_.sort', () => {
+    test('returns an empty array if an empty array is passed.', () => {
+        expect(_.sort([])).toEqual([]);
+    });
+});

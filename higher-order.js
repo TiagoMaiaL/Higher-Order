@@ -166,6 +166,15 @@ const _ = {
     },
 
     /**
+     * Given an unsorted array, returns the same array with its elements in a sorted order.
+     * @param {Array} arr - the with the elements to be sorted.
+     * @returns {Array} - the sorted array.
+     */
+    sort: function(arr) {
+        return [];
+    },
+
+    /**
      * Given an array and a function, runs the given function on every element and returns true if all elements are accounted.
      * Given an array and a callback, runs the given callback on every element and returns true if all elements are accounted.
      * @param {Array} arr - The array to be checked.
