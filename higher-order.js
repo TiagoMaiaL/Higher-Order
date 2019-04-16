@@ -106,34 +106,6 @@ const _ = {
     },
 
     /**
-     * Given an array, returns the largest element of it.
-     * @param {Array} arr - the array with the elements to be compared.
-     */
-    max: function(arr) {
-        guardArray(arr);
-
-        if (arr.length === 0) {
-            return undefined;
-        }
-
-        return this.reduce(arr, (previous, current) => previous > current ? previous : current);
-    },
-
-    /**
-     * Given an array, returns the smallest element of it.
-     * @param {Array} arr - the array with the elements to be compared.
-     */
-    min: function(arr) {
-        guardArray(arr);
-
-        if (arr.length === 0) {
-            return undefined;
-        }
-
-        return this.reduce(arr, (previous, current) => previous < current ? previous : current);
-    },
-
-    /**
      * Given an array and a closure, runs the closure in each element and returns the criterion by which the element is 
      * ranked as the maximum value.
      * @param {Array} arr - the array with the elements to be compared.
@@ -173,6 +145,22 @@ const _ = {
 
             return previousValue < currentValue ? previous : current;
         });
+    },
+
+    /**
+     * Given an array, returns the largest element of it.
+     * @param {Array} arr - the array with the elements to be compared.
+     */
+    max: function(arr) {
+        return this.maxBy(arr, val => val);
+    },
+
+    /**
+     * Given an array, returns the smallest element of it.
+     * @param {Array} arr - the array with the elements to be compared.
+     */
+    min: function(arr) {
+        return this.minBy(arr, val => val)
     },
 
     /**
