@@ -34,7 +34,12 @@ const _ = {
      * @param {Function} callback 
      */
     each: function(arr, callback) {
+        guardArray(arr);
+        guardFunction(callback);
 
+        for (let i = 0; i < arr.length; i++) {
+            callback(arr[i], i, arr);
+        }
     },
 
     /**

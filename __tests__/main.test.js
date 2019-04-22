@@ -3,7 +3,51 @@
 const { _ } = require('../higher-order.js');
 
 describe('_.each', () => {
-    
+    test('throws an error if the passed array isn\'t a valid one', () => {
+        expect(() => _.each(null)).toThrow(TypeError);
+    });
+
+    test('throws an error if the passed callback isn\'t a valid one', () => {
+        expect(() => _.each([], null)).toThrow(TypeError);
+    });
+
+    test('calls callback n times', () => {
+        let times = 0;
+        const input = [0, 1, 2, 3];
+        _.each(input, () => times++);
+
+        expect(times).toEqual(input.length);
+    });
+
+    test('calls callback with the value of each interation', () => {
+        let values = [];
+        const input = [0, 1, 2, 3];
+        _.each(input, (val) => values.push(val));
+
+        expect(values).toEqual(input);
+    });
+
+    test('calls callback with the current index', () => {
+        let values = [];
+        const input = [10, 20, 30, 40];
+        _.each(input, (_, i) => values.push(i));
+
+        expect(values).toEqual([0, 1, 2, 3]);
+    });
+
+    test('calls callback with the original array', () => {
+        let values = [];
+        const input = [10, 20, 30, 40];
+        _.each(input, (val, i, array) => {
+            if (i === 0 || i === array.length - 1) {
+                values.push('-');
+            } else {
+                values.push(val);
+            }
+        });
+
+        expect(values).toEqual(['-', 20, 30, '-']);
+    });
 });
 
 describe('_.reduce', () => {
