@@ -2,6 +2,10 @@
 
 const { _ } = require('../higher-order.js');
 
+describe('_.each', () => {
+    
+});
+
 describe('_.reduce', () => {
     test('throws an error if the passed array isn\'t a valid one', () => {
         const input = null;

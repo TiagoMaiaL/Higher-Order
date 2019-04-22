@@ -28,6 +28,16 @@ const guardArray = guardObjectType((array) => Array.isArray(array))('The passed 
  */
 const _ = {
     /**
+     * Given an array of length n, calls callback n times and passes the value of the current iteration to callback, 
+     * the current index, and the array.
+     * @param {Array} arr 
+     * @param {Function} callback 
+     */
+    each: function(arr, callback) {
+
+    },
+
+    /**
      * Given an array and a reducer function, returns the single value from calling 
      * reducer on each element of the array and accumulating the result.
      * @param {Array} arr - the array to be reduced to a single value.
