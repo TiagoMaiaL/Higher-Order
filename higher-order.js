@@ -240,8 +240,22 @@ const _ = {
         return this.reduce(arr, (previous, current) => {
             return previous || callback(current);
         }, false);
-    }
+    },
 
+    /**
+     * Given an array of functions, returns a function that composes them by successively 
+     * calling each one and passing the result of the previous to the next.
+     * @param {Array} arr - the array containing the functions to be composed.
+     */
+    flow: function(arr) {
+        guardArray(arr);
+
+        return function() {
+            return this.reduce(arr, (previous, current) => {
+                return current(previous);
+            }, arr.shift().apply(this, arguments));
+        }.bind(this);
+    }
 }
 
 module.exports = { _ };
