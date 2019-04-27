@@ -456,3 +456,36 @@ describe('_.sort', () => {
         expect(_.sort([false, true, false])).toEqual([false, false, true]);
     });
 });
+
+describe('_.flow', () => {
+    test('throws an error if the functions array is not valid', () => {
+        expect(() => _.flow(null)).toThrow(TypeError);
+    });
+
+    test('Returns a closure when called', () => {
+        expect(_.flow([])).toEqual(expect.any(Function));
+    });
+
+    test('Returns a closure that calls the single passed function', () => {
+        const single = _.flow([val => val]);
+        expect(single('val')).toBe('val');
+    });
+
+    test('Returns a closure that calls the two functions in order, by passing the results of one call into the other', () => {
+        const add = (a, b) => a + b;
+        const square = n => n * n;
+        const composed = _.flow([add, square]);
+
+        expect(composed(1, 2)).toBe(9);
+    });
+
+    test('Returns a closure that calls the two functions in order, by passing the results of one call into the other', () => {
+        const greet = person => `Hello ${person}.`;
+        const weatherTalk = sentence => `${sentence} It's a lovely day`;
+        const moodTalk = sentence => `${sentence}! How are you doing?`;
+
+        const sayHelloTo = _.flow([greet, weatherTalk, moodTalk]);
+
+        expect(sayHelloTo('Josh')).toBe('Hello Josh. It\'s a lovely day! How are you doing?');
+    });
+});
